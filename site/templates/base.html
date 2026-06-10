@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{% block title %}{{ config.extra.title }}{% endblock title %}</title>
+<meta name="description" content="{{ config.description | default(value=config.extra.subtitle) }}" />
+<link rel="stylesheet" href="{{ get_url(path='style.css', trailing_slash=false) }}" />
+<link rel="stylesheet" href="{{ get_url(path='fonts/nimbus/nimbus.css', trailing_slash=false) }}" />
+<link rel="stylesheet" href="{{ get_url(path='fonts/iosevka/iosevka.css', trailing_slash=false) }}" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path='rss.xml', trailing_slash=false) }}" />
+</head>
+<body>
+{% include "partials/sidebar.html" %}
+<div id="content">
+{% block content %}{% endblock %}
+</div>
+<script src="{{ get_url(path='lightbox.js', trailing_slash=false) }}"></script>
+</body>
+</html>
