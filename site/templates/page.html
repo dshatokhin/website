@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} | {{ config.extra.title }}{% endblock title %}
+{% block content %}
+<h1>{{ page.title }}</h1>
+<p class="post-date"><time datetime="{{ page.date }}">{{ page.date | date(format="%d %B %Y") | lower }}</time></p>
+{% if page.extra.arena_block %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set block_url = "https://api.are.na/v3/blocks/" ~ page.extra.arena_block %}
+  {% if token %}
+    {% set response = load_data(url=block_url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=block_url, format="json") %}
+  {% endif %}
+  {% if response.type == "Image" and response.image %}
+<img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail">
+  {% if response.description %}
+<p class="post-caption">{{ response.description.plain }}</p>
+  {% endif %}
+  {% endif %}
+{% endif %}
+{{ page.content | safe }}
+{% if page.extra.youtube %}
+<div class="youtube-embed">
+  <iframe
+    src="https://www.youtube.com/embed/{{ page.extra.youtube }}"
+    title="{{ page.title | default(value='YouTube video') }}"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+  </iframe>
+</div>
+{% endif %}
+{% if page.extra.arena %}
+  {% set channel = page.extra.arena %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set url = "https://api.are.na/v3/channels/" ~ channel ~ "/contents?per=100" %}
+  {% if token %}
+    {% set response = load_data(url=url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=url, format="json") %}
+  {% endif %}
+  <div class="gallery-grid">
+    {% for block in response.data | default(value=[]) %}
+      {% if block.type == "Image" and block.image %}
+        <div class="gallery-item">
+          <a href="{{ block.image.large.src | safe }}" data-lightbox="photodump" data-description="{{ block.description.plain | default(value='') }}">
+            <img src="{{ block.image.medium.src | safe }}"
+                 alt="{{ block.title | default(value='') }}"
+                 loading="lazy">
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock content %}

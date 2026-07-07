@@ -1,0 +1,26 @@
+name: Validate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Install Zola
+        uses: taiki-e/install-action@16b05812d776ae1dfaabc8277e421fb6d2506419 # v2.82.7
+        with:
+          tool: zola@0.22.1
+
+      - name: Check
+        run: zola --root site check
+        env:
+          ARENA_TOKEN: ${{ secrets.ARENA_TOKEN }}
+
+      - name: Build
+        run: zola --root site build
+        env:
+          ARENA_TOKEN: ${{ secrets.ARENA_TOKEN }}

@@ -1,0 +1,24 @@
+{# Fetch images from an Are.na channel.
+   Usage: {{ arena(channel="photodump_01_2026") }} #}
+{% if channel %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set url = "https://api.are.na/v3/channels/" ~ channel ~ "/contents?per=100" %}
+  {% if token %}
+    {% set response = load_data(url=url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=url, format="json") %}
+  {% endif %}
+  <div class="gallery-grid">
+    {% for block in response.data | default(value=[]) %}
+      {% if block.type == "Image" and block.image %}
+        <div class="gallery-item">
+          <a href="{{ block.image.large.src | safe }}" data-lightbox="photodump" data-description="{{ block.description.plain | default(value='') }}">
+            <img src="{{ block.image.medium.src | safe }}"
+                 alt="{{ block.title | default(value='') }}"
+                 loading="lazy">
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

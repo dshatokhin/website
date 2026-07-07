@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ section.title }} | {{ config.extra.title }}{% endblock title %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+{{ section.content | safe }}
+{% for page in section.pages %}
+<article>
+<h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+<p>{{ page.date | date(format="%d %B %Y") | lower }} &middot;
+{% for tag in page.taxonomies.tags %}
+<a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+{% endfor %}
+</p>
+{% if page.extra.youtube %}
+<a href="{{ page.permalink }}"><img src="https://img.youtube.com/vi/{{ page.extra.youtube }}/sddefault.jpg" alt="" class="list-thumbnail"></a>
+{% elif page.extra.thumbnail %}
+<a href="{{ page.permalink }}"><img src="{{ page.extra.thumbnail }}" alt="" class="list-thumbnail"></a>
+{% elif page.extra.arena_block %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set block_url = "https://api.are.na/v3/blocks/" ~ page.extra.arena_block %}
+  {% if token %}
+    {% set response = load_data(url=block_url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=block_url, format="json") %}
+  {% endif %}
+  {% if response.type == "Image" and response.image %}
+<a href="{{ page.permalink }}"><img src="{{ response.image.small.src_2x | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail"></a>
+  {% endif %}
+{% elif page.extra.arena %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set url = "https://api.are.na/v3/channels/" ~ page.extra.arena ~ "/contents?per=1" %}
+  {% if token %}
+    {% set response = load_data(url=url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=url, format="json") %}
+  {% endif %}
+  {% for block in response.data | default(value=[]) %}
+    {% if block.type == "Image" and block.image %}
+<a href="{{ page.permalink }}"><img src="{{ block.image.small.src_2x | safe }}" alt="" class="list-thumbnail"></a>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+<p>{{ page.summary | safe }}</p>
+</article>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,7 @@
+[tasks.build]
+description = "Run Zola"
+run = "zola --root ./site build"
+
+[tasks.serve]
+description = "Serve Zola site with hot reload"
+run = "zola --root ./site serve --interface 0.0.0.0 --port 1111"

@@ -1,0 +1,21 @@
+{% if block %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set block_url = "https://api.are.na/v3/blocks/" ~ block %}
+  {% if token %}
+    {% set response = load_data(url=block_url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=block_url, format="json") %}
+  {% endif %}
+  {% if response.type == "Image" and response.image %}
+  {% if height %}
+    {% set pos = position | default(value='top') %}
+    {% set style = "object-fit:cover; max-height:" ~ height ~ "px; object-position:center " ~ pos ~ ";" %}
+<img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail" style="{{ style }}">
+  {% else %}
+<img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail">
+  {% endif %}
+  {% if response.description %}
+<p class="post-caption">{{ response.description.plain }}</p>
+  {% endif %}
+  {% endif %}
+{% endif %}

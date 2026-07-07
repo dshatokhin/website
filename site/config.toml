@@ -1,0 +1,37 @@
+base_url = "https://shatokhin.org"
+
+compile_sass = true
+build_search_index = false
+
+taxonomies = [
+  {name = "tags"},
+]
+
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+[link_checker]
+skip_prefixes = [
+    "https://youtu.be/",
+    "https://www.linkedin.com/",
+    "https://chinesecookingdemystified.substack.com/",
+    "https://andreasviklund.com/",
+    "https://github.com/dshatokhin/website",
+]
+
+[markdown]
+[markdown.highlighting]
+theme = "vesper"
+
+[extra]
+title = "denis shatokhin"
+subtitle = "personal website"
+author = "denis shatokhin"
+license = "design by <a href=\"https://andreasviklund.com/about/\">Andreas Viklund</a>."
+menu = [
+  {name = "home", path = "/"},
+  {name = "cooking", path = "/cooking/"},
+  {name = "devops", path = "/devops/"},
+  {name = "music", path = "/music/"},
+  {name = "photodump", path = "/photodump/"},
+]
