@@ -1,5 +1,8 @@
 base_url = "https://shatokhin.org"
 
+title = "denis shatokhin"
+description = "personal website"
+
 compile_sass = true
 build_search_index = false
 
@@ -9,6 +12,8 @@ taxonomies = [
 
 generate_feeds = true
 feed_filenames = ["rss.xml"]
+
+author = "denis shatokhin"
 
 [link_checker]
 skip_prefixes = [
