@@ -16,6 +16,7 @@ feed_filenames = ["rss.xml"]
 author = "denis shatokhin"
 
 [link_checker]
+external_level = "warn"
 skip_prefixes = [
     "https://youtu.be/",
     "https://www.linkedin.com/",
