@@ -2,7 +2,7 @@
 title = "pinkpantheress - just for me"
 date = 2025-04-07
 [taxonomies]
-tags = ["softclub", "youtube"]
+tags = ["pop", "youtube"]
 [extra]
 youtube = "Xo_lPnBlfto"
 +++
