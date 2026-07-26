@@ -194,3 +194,64 @@ pre code
 
 code[data-name]::before
 {content:attr(data-name); display:block; margin:-15px -15px 10px -15px; padding:8px 15px; background:rgba(0,0,0,0.25); font-size:1em; color:#9399B2;}
+
+@media screen and (max-width: 800px) {
+  #sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background: #e0e0e0;
+  }
+  body > #sidebar {
+    position: relative;
+  }
+  #sidebar h1 {
+    margin: 12px 10px 2px 10px;
+    text-align: center;
+  }
+  #sidebar h2 {
+    margin: 0 10px 10px 10px;
+    text-align: center;
+    font-size: 0.86em;
+  }
+
+  #menu a {
+    display: inline-block;
+    width: auto;
+    padding: 6px 12px;
+    font-size: 1.2em;
+    letter-spacing: 0;
+    background: none;
+    border: none;
+  }
+  #menu a.active {
+    padding: 6px 12px;
+    background: none;
+    border: none;
+    color: #d85d5d;
+  }
+  #menu a.active:hover {
+    color: #505050;
+  }
+
+  #content {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    border-right: none;
+  }
+
+  #content h1 {
+    font-size: 2em;
+    letter-spacing: -2px;
+  }
+  #content h2 {
+    font-size: 1.6em;
+    letter-spacing: -1px;
+  }
+  #content h3 {
+    font-size: 1.3em;
+    letter-spacing: -1px;
+  }
+}
