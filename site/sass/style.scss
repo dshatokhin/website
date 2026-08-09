@@ -254,4 +254,8 @@ code[data-name]::before
     font-size: 1.3em;
     letter-spacing: -1px;
   }
+
+  .lightbox-overlay .lightbox-img {
+    max-width: 100%;
+  }
 }
