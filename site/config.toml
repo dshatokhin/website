@@ -38,6 +38,7 @@ menu = [
   {name = "home", path = "/"},
   {name = "cooking", path = "/cooking/"},
   {name = "devops", path = "/devops/"},
+  {name = "presentations", path = "/presentations/"},
   {name = "music", path = "/music/"},
   {name = "photodump", path = "/photodump/"},
 ]

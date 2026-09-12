@@ -12,6 +12,7 @@ I'm a Site Reliability Engineer and an obsessed follower of Infrastructure as Co
 
 - [cooking](/cooking) - some recipes, original and adapted
 - [devops](/devops) - everything related to infrastructure
+- [presentations](/presentations) - talks at conferences and meetups
 - [music](/music) - my music finds
 - [photodump](/photodump) - monthly photo dump
 
