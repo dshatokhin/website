@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ section.title }} | {{ config.extra.title }}{% endblock title %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+{{ section.content | safe }}
+{% for page in section.pages %}
+<article>
+<h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+<p>{{ page.extra.event }} &middot; {{ page.date | date(format="%B %Y") | lower }} &middot;
+{% if page.taxonomies.tags %}
+{% for tag in page.taxonomies.tags %}
+<a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+{% endfor %}
+{% endif %}
+</p>
+{% if page.extra.youtube %}
+<a href="{{ page.permalink }}"><img src="https://img.youtube.com/vi/{{ page.extra.youtube }}/sddefault.jpg" alt="" class="list-thumbnail"></a>
+{% elif page.extra.arena_block %}
+  {% set token = get_env(name="ARENA_TOKEN", default="") %}
+  {% set block_url = "https://api.are.na/v3/blocks/" ~ page.extra.arena_block %}
+  {% if token %}
+    {% set response = load_data(url=block_url, format="json", headers=["authorization=Bearer " ~ token]) %}
+  {% else %}
+    {% set response = load_data(url=block_url, format="json") %}
+  {% endif %}
+  {% if response.type == "Image" and response.image %}
+<a href="{{ page.permalink }}"><img src="{{ response.image.small.src_2x | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail"></a>
+  {% endif %}
+{% endif %}
+</article>
+{% endfor %}
+{% endblock content %}

@@ -53,6 +53,46 @@ and renders a gallery with a lightbox viewer.
 
 Set `ARENA_TOKEN` in GitHub Actions secrets if the channel is private.
 
+### Presentation page
+
+Create `site/content/presentations/my-talk.md`:
+
+```markdown
++++
+title = "My Talk"
+date = 2026-07-01
+[extra]
+event = "KCD Helsinki 2026"
+youtube = "VIDEO_ID"
++++
+```
+
+Add `youtube_start = 4372` to start the embedded video at a timestamp.
+For a talk without a recording, link the slides instead:
+
+```markdown
++++
+title = "My Talk"
+date = 2026-07-01
+[extra]
+event = "HUG Helsinki"
+link = "https://example.com/slides.pdf"
+link_label = "slides (pdf)"
++++
+```
+
+To use a slide image thumbnail, upload it to the
+[website-static](https://www.are.na/denis-shatokhin/website-static) Are.na channel
+and set `arena_block` to the block ID:
+
+```markdown
+[extra]
+arena_block = "50357747"
+```
+
+The section sorts talks newest first. Presentation pages also support the
+tags taxonomy like any other page.
+
 ### Other posts
 
 ```markdown
@@ -133,8 +173,9 @@ site/
 │   ├── _index.md            # homepage
 │   ├── music/               # music posts (YouTube embeds)
 │   ├── photodump/           # photo galleries (Are.na embeds)
+│   ├── presentations/       # conference talks and meetups
 │   ├── cooking/             # recipes
-│   └── devops/              # tech articles (disabled in nav)
+│   └── devops/              # tech articles
 ├── sass/style.scss           # site styles (based on andreas07)
 ├── templates/                # Zola templates + shortcodes
 └── static/                   # images, fonts, lightbox.js, CNAME
