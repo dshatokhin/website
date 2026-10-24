@@ -141,6 +141,10 @@ Use the `.center` CSS class in any Markdown file:
 | `arena_image` | `{{ arena_image(block="39199142") }}` |
 | `arena_image` (cropped) | `{{ arena_image(block="39199142", height="300") }}` |
 
+Both `arena_image` variants render a clickable image that opens the full-size
+(`large`) Are.na image in the site lightbox. All `arena_image` shortcodes on a
+page form a single gallery, so the lightbox arrows move between them.
+
 ### Code block filenames
 
 Use the `name=` attribute on code fences to add a filename header bar:
