@@ -111,6 +111,12 @@ body > #sidebar
 article .list-thumbnail
 {max-height:250px; object-fit:cover; object-position:center;}
 
+.arena-image-link
+{display:block;}
+
+.arena-image-link img
+{border-color:#d0d0d0;}
+
 .gallery-grid
 {display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:0.5em; margin:1em 0;}
 
@@ -119,6 +125,17 @@ article .list-thumbnail
 
 .gallery-grid .gallery-item img
 {width:100%; height:200px; object-fit:cover; display:block; box-sizing:border-box;}
+
+/**************** Quote styles ****************/
+
+#content blockquote
+{margin:0 0 20px 0; padding:12px 15px; background:#fff; border-left:3px solid #d85d5d; color:#505050;}
+
+#content blockquote p
+{margin:0 0 8px 0; line-height:1.5em;}
+
+#content blockquote p:last-child
+{margin-bottom:0;}
 
 /**************** Table styles ****************/
 

@@ -10,9 +10,13 @@
   {% if height %}
     {% set pos = position | default(value='top') %}
     {% set style = "object-fit:cover; max-height:" ~ height ~ "px; object-position:center " ~ pos ~ ";" %}
-<img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail" style="{{ style }}">
+<a class="arena-image-link" href="{{ response.image.large.src | safe }}" data-lightbox="photodump" data-description="{{ response.description.plain | default(value='') }}">
+  <img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail" style="{{ style }}">
+</a>
   {% else %}
-<img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail">
+<a class="arena-image-link" href="{{ response.image.large.src | safe }}" data-lightbox="photodump" data-description="{{ response.description.plain | default(value='') }}">
+  <img src="{{ response.image.medium.src | safe }}" alt="{{ response.image.alt_text | default(value='') }}" class="list-thumbnail">
+</a>
   {% endif %}
   {% if response.description %}
 <p class="post-caption">{{ response.description.plain }}</p>
