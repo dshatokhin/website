@@ -44,7 +44,7 @@
     {% for block in response.data | default(value=[]) %}
       {% if block.type == "Image" and block.image %}
         <div class="gallery-item">
-          <a href="{{ block.image.large.src | safe }}" data-lightbox="photodump" data-description="{{ block.description.plain | default(value='') }}">
+          <a href="{{ block.image.medium.src | safe }}" data-large="{{ block.image.large.src | safe }}" data-lightbox="photodump" data-description="{{ block.description.plain | default(value='') }}">
             <img src="{{ block.image.medium.src | safe }}"
                  alt="{{ block.title | default(value='') }}"
                  loading="lazy">

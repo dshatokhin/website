@@ -1,6 +1,7 @@
 +++
 title = "first website iteration"
 date = 2026-04-04
+aliases = ["/devops/first-website-iteration/"]
 [extra]
 arena_block = "47568448"
 [taxonomies]

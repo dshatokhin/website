@@ -37,7 +37,7 @@ license = "design by <a href=\"https://andreasviklund.com/about/\">Andreas Viklu
 menu = [
   {name = "home", path = "/"},
   {name = "cooking", path = "/cooking/"},
-  {name = "devops", path = "/devops/"},
+  {name = "workshop", path = "/workshop/"},
   {name = "presentations", path = "/presentations/"},
   {name = "music", path = "/music/"},
   {name = "photodump", path = "/photodump/"},

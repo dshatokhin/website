@@ -179,7 +179,7 @@ site/
 │   ├── photodump/           # photo galleries (Are.na embeds)
 │   ├── presentations/       # conference talks and meetups
 │   ├── cooking/             # recipes
-│   └── devops/              # tech articles
+│   └── workshop/            # infra, software, repairs, homelab
 ├── sass/style.scss           # site styles (based on andreas07)
 ├── templates/                # Zola templates + shortcodes
 └── static/                   # images, fonts, lightbox.js, CNAME
