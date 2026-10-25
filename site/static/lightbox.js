@@ -35,6 +35,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentGroup = null;
   let currentIndex = -1;
+  let upgradeToken = 0;
+
+  // Full-size images requested on hover/focus, so the click can reuse them.
+  const prefetched = new Set();
+
+  function prefetch(url) {
+    if (!url || prefetched.has(url)) return;
+    prefetched.add(url);
+    new Image().src = url;
+  }
+
+  // The link's href is already cached by the thumbnail, so it paints instantly.
+  // Swap in the full-size bitmap once it has decoded, without hiding the image.
+  function upgradeFull(link) {
+    const full = link.dataset.large;
+    if (!full || full === link.href) return;
+    const token = ++upgradeToken;
+    const pre = new Image();
+    pre.onload = () => {
+      if (token === upgradeToken) img.src = full;
+    };
+    pre.src = full;
+  }
 
   function show(src) {
     loader.style.display = 'block';
@@ -65,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = groups[group];
     if (!links || !links[index]) return;
     show(links[index].href);
+    upgradeFull(links[index]);
     updateDescription();
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -77,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
     currentGroup = null;
     currentIndex = -1;
+    upgradeToken++;
     img.src = '';
     descEl.style.display = 'none';
   }
@@ -89,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newIndex >= 0 && newIndex < links.length) {
       currentIndex = newIndex;
       show(links[currentIndex].href);
+      upgradeFull(links[currentIndex]);
       updateDescription();
       updateNavButtons();
     }
@@ -122,6 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Object.entries(groups).forEach(([group, links]) => {
     links.forEach((link, index) => {
+      const prime = () => prefetch(link.dataset.large);
+      link.addEventListener('pointerenter', prime);
+      link.addEventListener('focus', prime);
+      link.addEventListener('touchstart', prime, { passive: true });
       link.addEventListener('click', e => {
         e.preventDefault();
         open(group, index);

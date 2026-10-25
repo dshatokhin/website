@@ -1,5 +1,5 @@
 <div id="sidebar">
-<h1>{{ config.extra.title }}</h1>
+<h1><a href="{{ get_url(path='@/_index.md') }}">{{ config.extra.title }}</a></h1>
 <h2>{{ config.extra.subtitle }}</h2>
 <div id="menu">
 {% for item in config.extra.menu %}

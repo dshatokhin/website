@@ -1,6 +1,7 @@
 +++
 title = "hegel h90 encoders repair"
 date = 2026-10-24
+aliases = ["/devops/hegel-h90-encoders-repair/"]
 [extra]
 arena_block = "51808815"
 [taxonomies]
